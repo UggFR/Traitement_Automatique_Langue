@@ -1,6 +1,7 @@
 import nltk
 import sys
 import os
+import time
 # nltk.download('punkt')
 # nltk.download('averaged_perceptron_tagger')
 from nltk.tokenize import word_tokenize
@@ -19,7 +20,7 @@ st = StanfordPOSTagger(stanford_pos_model, stanford_pos_jar)
 ########## VARIABLES GLOBALES ##########
 SENTENCES = []
 REF_PTB   = {}
-PTB_UNIV  = {"HYPH":"."}
+PTB_UNIV  = {"HYPH":".", "ADD":".", "NFP":"NOUN", "-LRB-":".","-RLB-":"."}
 TAG_STANFORD  = []
 
 TEXT_REF_FILE     = "pos_reference.txt"
@@ -93,6 +94,8 @@ def write_sentences_file(text_res_file):
 
 def write_postags_universal_file(postags_reference_file, postags_universal_file, tag):
     try:
+        index = 0
+        print(index)
         with open(postags_reference_file, 'r') as input_file, open(postags_universal_file, 'w') as output_file:
             for line in input_file:
                 if len(line) == 1:
@@ -103,6 +106,8 @@ def write_postags_universal_file(postags_reference_file, postags_universal_file,
                         output_file.write(l[0] + "\t" + PTB_UNIV[REF_PTB[l[1][:-1]]] + "\n")
                     elif tag == "PTB":
                         output_file.write(l[0] + "\t" + PTB_UNIV[l[1][:-1]] + "\n")
+                print(index)
+                index+=1
     except FileNotFoundError:
         print(f"File \"{postags_reference_file}\" not found.")
     print(f"Universal Postags : File \"{postags_universal_file}\" created.")
@@ -113,7 +118,7 @@ def extract_tag_stanford_conll(text_res_file):
         with open(text_res_file, 'r') as file:
             index = 0
             for line in file:
-                if index == 10:
+                if index == 500:
                     break
                 sentence = st.tag(line.split())
                 for s in sentence:
@@ -131,6 +136,7 @@ def write_tag_file(token_tag_file, tag, postagger):
                 file.write("\n")
     print(f"Tokenisation {postagger} achieved : File \"{token_tag_file}\" created.")
 
+temps_debut = time.time()
 
 ##### MAIN #####
 #extract_sentences_file(TEXT_REF_FILE)
@@ -140,12 +146,18 @@ create_dic_ref_universal(POSTAGS_REF_PTB, POSTAGS_PTB_UNIV)
 
 #text   = open_file(TEXT_RES_FILE)
 #tokens = word_tokenize(text)
-extract_tag_stanford_conll(TEXT_RES_FILE)
+#extract_tag_stanford_conll(TEXT_RES_FILE)
 #tag_nltk = nltk.pos_tag(tokens)
 
 #write_tag_file(POSTAG_NLTK_FILE, tag_nltk, "NLTK")
 #write_postags_universal_file(POSTAG_NLTK_FILE, POSTAG_UNIV_NLTK_FILE, "PTB")
 
 # print(TAG_STANFORD)
-write_tag_file(POSTAG_STANFORD_FILE, TAG_STANFORD, "STANFORD")
+#write_tag_file(POSTAG_STANFORD_FILE, TAG_STANFORD, "STANFORD")
 write_postags_universal_file(POSTAG_STANFORD_FILE, POSTAG_UNIV_STANFORD_FILE, "PTB")
+
+
+temps_fin = time.time()
+
+# Calcul du temps écoulé
+temps_execution = temps_fin - temps_debut
