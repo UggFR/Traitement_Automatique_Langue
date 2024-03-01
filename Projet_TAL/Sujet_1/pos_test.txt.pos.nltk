@@ -230,8 +230,10 @@ asbestos	NN
 in	IN
 our	PRP$
 products	NNS
-now.	RB
-''	''
+now	RB
+.	.
+
+``	``
 Neither	CC
 Lorillard	NNP
 nor	CC
@@ -610,7 +612,7 @@ of	IN
 Medicine	NNP
 .	.
 
-More	JJR
+More	RBR
 common	JJ
 chrysotile	NN
 fibers	NNS
@@ -684,7 +686,7 @@ to	TO
 asbestos	NNS
 in	IN
 the	DT
-1950s	NNS
+1950s	CD
 .	.
 
 Areas	NNP
@@ -881,7 +883,7 @@ ended	VBD
 Tuesday	NNP
 .	.
 
-Compound	NNP
+Compound	NN
 yields	NNS
 assume	VBP
 reinvestment	NN
@@ -898,7 +900,7 @@ a	DT
 year	NN
 .	.
 
-Average	NNP
+Average	JJ
 maturity	NN
 of	IN
 the	DT
@@ -1007,7 +1009,7 @@ year	NN
 days	NNS
 .	.
 
-Nevertheless	NNP
+Nevertheless	RB
 ,	,
 said	VBD
 Brenda	NNP
@@ -1167,7 +1169,7 @@ from	IN
 %	NN
 a	DT
 week	NN
-earlier	RB
+earlier	RBR
 .	.
 
 It	PRP
@@ -1248,7 +1250,9 @@ of	IN
 W.R.	NNP
 Grace	NNP
 &	CC
-Co.	NNP
+Co	NNP
+.	.
+
 ,	,
 which	WDT
 holds	VBZ
@@ -1310,7 +1314,9 @@ acquisition	NN
 by	IN
 Royal	NNP
 Trustco	NNP
-Ltd.	NNP
+Ltd	NNP
+.	.
+
 of	IN
 Toronto	NNP
 for	IN
@@ -1367,7 +1373,7 @@ Finmeccanica	NNP
 S.p	NNP
 .	.
 
-A.	NNP
+A.	NN
 for	IN
 $	$
 295	CD
@@ -2359,9 +2365,9 @@ three	CD
 years	NNS
 .	.
 
-Plans	VBZ
-that	IN
-give	JJ
+Plans	NNS
+that	WDT
+give	VBP
 advertisers	NNS
 discounts	NNS
 for	IN
@@ -2426,7 +2432,7 @@ in	IN
 January	NNP
 .	.
 
-A	NNP
+A	DT
 full	JJ
 ,	,
 four	CD
@@ -2441,7 +2447,7 @@ $	$
 .	.
 
 In	IN
-mid-October	NN
+mid-October	NNP
 ,	,
 Time	NNP
 magazine	NN
@@ -2520,9 +2526,11 @@ to	TO
 advertisers	NNS
 on	IN
 ``	``
-renewal	NN
-advertising.	NN
-''	''
+renewal	JJ
+advertising	NN
+.	.
+
+``	``
 The	DT
 magazine	NN
 will	MD
@@ -2882,7 +2890,9 @@ in	IN
 New	NNP
 Haven	NNP
 ,	,
-Conn.	NNP
+Conn	NNP
+.	.
+
 ,	,
 and	CC
 Northeast	NNP
@@ -2891,7 +2901,9 @@ based	VBN
 in	IN
 Hartford	NNP
 ,	,
-Conn.	NNP
+Conn	NNP
+.	.
+
 PS	NNP
 of	IN
 New	NNP
@@ -3023,7 +3035,7 @@ England	NNP
 Electric	NNP
 .	.
 
-No	NNP
+No	DT
 matter	NN
 who	WP
 owns	VBZ
@@ -3622,8 +3634,10 @@ be	VB
 ``	``
 an	DT
 administrative	JJ
-nightmare.	NN
-''	''
+nightmare	NN
+.	.
+
+``	``
 In	IN
 New	NNP
 York	NNP
@@ -4079,7 +4093,9 @@ October	NNP
 Texas	NNP
 Instruments	NNP
 Japan	NNP
-Ltd.	NNP
+Ltd	NNP
+.	.
+
 ,	,
 a	DT
 unit	NN
@@ -4428,8 +4444,10 @@ that	WDT
 did	VBD
 not	RB
 include	VB
-Seymour.	NNP
-''	''
+Seymour	NNP
+.	.
+
+``	``
 The	DT
 documents	NNS
 also	RB
@@ -4579,8 +4597,10 @@ again	RB
 or	CC
 you	PRP
 do	VBP
-n't.	RB
-''	''
+n't	RB
+.	.
+
+``	``
 Besides	IN
 the	DT
 designer	NN
@@ -4735,7 +4755,6 @@ and	CC
 Fujitsu	NNP
 Ltd	NNP
 .	.
-
 The	DT
 new	JJ
 company	NN
@@ -4990,7 +5009,9 @@ new	JJ
 Colorado	NNP
 Springs	NNP
 ,	,
-Colo.	NNP
+Colo	NNP
+.	.
+
 ,	,
 company	NN
 as	IN
@@ -5007,7 +5028,7 @@ Cray	NNP
 Research	NNP
 .	.
 
-Regarded	VBD
+Regarded	VBN
 as	IN
 the	DT
 father	NN
@@ -5041,7 +5062,9 @@ $	$
 .	.
 
 Besides	IN
-Messrs.	NNPS
+Messrs	NNP
+.	.
+
 Cray	NNP
 and	CC
 Barnum	NNP
@@ -5256,7 +5279,7 @@ vice	NN
 president	NN
 of	IN
 Eastern	NNP
-Utilities	NNPS
+Utilities	NNP
 .	.
 
 He	PRP
@@ -5449,8 +5472,10 @@ offending	VBG
 country	NN
 's	POS
 own	JJ
-citizens.	NN
-''	''
+citizens	NNS
+.	.
+
+``	``
 U.S.	NNP
 trade	NN
 negotiators	NNS
@@ -5827,8 +5852,10 @@ continuing	VBG
 slow	JJ
 progress	NN
 in	IN
-Malaysia.	NNP
-''	''
+Malaysia	NNP
+.	.
+
+``	``
 She	PRP
 did	VBD
 n't	RB
@@ -6058,7 +6085,6 @@ took	VBD
 office	NN
 Jul	NNP
 .	.
-
 8	CD
 ,	,
 feels	VBZ
@@ -6121,7 +6147,9 @@ milestones	NNS
 of	IN
 American	JJ
 business	NN
-history.	NN
+history	NN
+.	.
+
 )	)
 THREE	CD
 COMPUTERS	NNPS
@@ -6232,7 +6260,7 @@ $	$
 1,298	CD
 .	.
 
-Crude	NN
+Crude	NNP
 as	IN
 they	PRP
 were	VBD
@@ -6452,15 +6480,16 @@ some	DT
 $	$
 38.3	CD
 billion	CD
-world-wide	JJ
+world-wide	NN
 .	.
 
 F.H	NNP
 .	.
-
 Faulding	NNP
 &	CC
-Co.	NNP
+Co	NNP
+.	.
+
 ,	,
 an	DT
 Australian	JJ
@@ -6551,7 +6580,7 @@ voting	VBG
 stock	NN
 .	.
 
-Oil	CC
+Oil	NN
 production	NN
 from	IN
 Australia	NNP
@@ -6600,7 +6629,9 @@ of	IN
 
 Esso	NNP
 Australia	NNP
-Ltd.	NNP
+Ltd	NNP
+.	.
+
 ,	,
 a	DT
 unit	NN
@@ -6617,7 +6648,6 @@ Broken	NNP
 Hill	NNP
 Pty	NNP
 .	.
-
 operate	VB
 the	DT
 fields	NNS
@@ -6730,7 +6760,6 @@ tax	NN
 
 R.P	NNP
 .	.
-
 Scherer	NNP
 Corp.	NNP
 said	VBD
@@ -6771,7 +6800,6 @@ acquisition	NN
 of	IN
 R.P	NNP
 .	.
-
 Scherer	NNP
 by	IN
 a	DT
@@ -6963,8 +6991,10 @@ U.S.	NNP
 and	CC
 the	DT
 Virgin	NNP
-Islands.	NNP
-''	''
+Islands	NNP
+.	.
+
+``	``
 Timex	NNP
 is	VBZ
 a	DT
@@ -7328,7 +7358,7 @@ chief	JJ
 executive	NN
 .	.
 
-Neither	CC
+Neither	DT
 they	PRP
 nor	CC
 Mr.	NNP
@@ -7569,7 +7599,7 @@ Japanese	JJ
 investors	NNS
 .	.
 
-First	NNP
+First	RB
 ,	,
 they	PRP
 are	VBP
@@ -7606,7 +7636,7 @@ lower	JJR
 rates	NNS
 .	.
 
-Second	NNP
+Second	LS
 ,	,
 they	PRP
 channel	VBP
@@ -7650,8 +7680,9 @@ investors	NNS
 outside	IN
 the	DT
 U.S	NNP
-..	NNP
-''	''
+..	NN
+
+``	``
 Such	JJ
 devices	NNS
 have	VBP
@@ -7725,7 +7756,7 @@ of	IN
 the	DT
 total	JJ
 amount	NN
-issued	VBN
+issued	VBD
 .	.
 
 James	NNP
@@ -8025,7 +8056,7 @@ $	$
 billion	CD
 .	.
 
-Pick	VB
+Pick	NNP
 a	DT
 country	NN
 ,	,
@@ -8097,7 +8128,9 @@ Charles	NNP
 E.	NNP
 Simon	NNP
 &	CC
-Co.	NNP
+Co	NNP
+.	.
+
 ,	,
 a	DT
 Washington	NNP
@@ -8163,8 +8196,9 @@ The	DT
 next	JJ
 province	NN
 ?	.
+
 ``	``
-Anything	NNP
+Anything	NN
 is	VBZ
 possible	JJ
 --	:
@@ -8175,6 +8209,7 @@ New	NNP
 Guinea	NNP
 Fund	NNP
 ?	.
+
 ``	``
 quips	NNS
 George	NNP
@@ -8192,7 +8227,6 @@ Northampton	NNP
 ,	,
 Mass	NNP
 .	.
-
 The	DT
 recent	JJ
 explosion	NN
@@ -8213,7 +8247,6 @@ the	DT
 ,	,
 Mr	NNP
 .	.
-
 Foot	NNP
 says	VBZ
 ,	,
@@ -8338,7 +8371,9 @@ Barney	NNP
 Harris	NNP
 Upham	NNP
 &	CC
-Co.	NNP
+Co	NNP
+.	.
+
 ,	,
 New	NNP
 York	NNP
@@ -8435,7 +8470,7 @@ and	CC
 Japan	NNP
 .	.
 
-Country	VB
+Country	NN
 funds	NNS
 offer	VBP
 an	DT
@@ -8809,7 +8844,7 @@ Porter	NNP
 says	VBZ
 .	.
 
-Nonetheless	NNP
+Nonetheless	RB
 ,	,
 plenty	NN
 of	IN
@@ -8862,8 +8897,9 @@ traded	VBN
 in	IN
 the	DT
 U.S	NNP
-..	NNP
-That	NNP
+..	NN
+
+That	DT
 way	NN
 investors	NNS
 can	MD
@@ -8894,7 +8930,6 @@ Newgate	NNP
 's	POS
 Mr	NNP
 .	.
-
 Foot	NNP
 says	VBZ
 :	:
@@ -8980,7 +9015,8 @@ sold	VBN
 in	IN
 the	DT
 U.S	NNP
-..	NNP
+..	NN
+
 However	RB
 ,	,
 after	IN
@@ -9297,8 +9333,8 @@ in	IN
 September	NNP
 .	.
 
-Any	NNP
-reading	VBG
+Any	DT
+reading	NN
 below	IN
 50	CD
 %	NN
@@ -9417,7 +9453,7 @@ for	IN
 August	NNP
 .	.
 
-Private	NNP
+Private	JJ
 construction	NN
 spending	NN
 was	VBD
@@ -9516,6 +9552,7 @@ up	RP
 the	DT
 slack	NN
 ?	.
+
 ``	``
 he	PRP
 asked	VBD
@@ -9525,8 +9562,10 @@ asked	VBD
 I	PRP
 draw	VBP
 a	DT
-blank.	NN
-''	''
+blank	NN
+.	.
+
+``	``
 By	IN
 most	JJS
 measures	NNS
@@ -9547,7 +9586,7 @@ at	IN
 all	DT
 .	.
 
-Factory	NNP
+Factory	NN
 payrolls	NNS
 fell	VBD
 in	IN
@@ -9566,7 +9605,7 @@ production	NN
 index	NN
 .	.
 
-Yet	CC
+Yet	RB
 many	JJ
 economists	NNS
 are	VBP
@@ -9688,7 +9727,9 @@ Lufkin	NNP
 &	CC
 Jenrette	NNP
 Securities	NNP
-Corp.	NNP
+Corp	NNP
+.	.
+
 ``	``
 I	PRP
 do	VBP
@@ -9699,8 +9740,10 @@ signs	NNS
 that	IN
 inventories	NNS
 are	VBP
-excessive.	JJ
-''	''
+excessive	JJ
+.	.
+
+``	``
 A	DT
 soft	JJ
 landing	NN
@@ -9930,7 +9973,7 @@ next	JJ
 year	NN
 .	.
 
-Spending	NN
+Spending	VBG
 on	IN
 private	JJ
 ,	,
@@ -10029,7 +10072,6 @@ Inc.	NNP
 's	POS
 F.W	NNP
 .	.
-
 Dodge	NNP
 Group	NNP
 .	.
@@ -10126,7 +10168,6 @@ Stamford	NNP
 ,	,
 Conn	NNP
 .	.
-
 He	PRP
 said	VBD
 the	DT
@@ -10439,9 +10480,11 @@ least	JJS
 not	RB
 increasing	VBG
 that	IN
-much.	NN
-''	''
-Items	VBZ
+much	JJ
+.	.
+
+``	``
+Items	RB
 listed	VBN
 as	IN
 being	VBG
@@ -10624,7 +10667,7 @@ common	JJ
 .	.
 
 Although	IN
-set	NN
+set	VBN
 in	IN
 Japan	NNP
 ,	,
@@ -10641,7 +10684,7 @@ especially	RB
 American	JJ
 .	.
 
-Characters	NNPS
+Characters	NNS
 drink	VBP
 Salty	NNP
 Dogs	NNP
@@ -10660,7 +10703,7 @@ reruns	NNS
 .	.
 
 They	PRP
-read	VBD
+read	VBP
 Mickey	NNP
 Spillane	NNP
 and	CC
@@ -10694,6 +10737,7 @@ This	DT
 is	VBZ
 Japan	NNP
 ?	.
+
 For	IN
 an	DT
 American	JJ
@@ -10827,7 +10871,7 @@ funny	JJ
 .	.
 
 A	DT
-disaffected	JJ
+disaffected	VBN
 ,	,
 hard	JJ
 drinking	NN
@@ -10942,7 +10986,7 @@ in	IN
 Japan	NNP
 .	.
 
-A	NNP
+A	DT
 more	RBR
 recent	JJ
 novel	NN
@@ -11065,8 +11109,10 @@ to	TO
 call	VB
 a	DT
 ``	``
-game.	NN
-''	''
+game	NN
+.	.
+
+``	``
 As	IN
 Mr.	NNP
 Whiting	NNP
@@ -11088,8 +11134,10 @@ of	IN
 hard	JJ
 work	NN
 and	CC
-harmony.	NN
-''	''
+harmony	NN
+.	.
+
+``	``
 ``	``
 Wa	NNP
 ``	``
@@ -11111,7 +11159,7 @@ of	IN
 it	PRP
 .	.
 
-A	NNP
+A	DT
 player	NN
 's	POS
 commitment	NN
@@ -11129,7 +11177,7 @@ batting	NN
 average	NN
 .	.
 
-Polls	NNP
+Polls	NNS
 once	RB
 named	VBD
 Tokyo	NNP
