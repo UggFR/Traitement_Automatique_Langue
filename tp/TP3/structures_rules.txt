@@ -1,0 +1,5 @@
+Determinant-Adjectif-Nom    """Compound: {<DT>?<JJ>*<NN>}"""
+Adjectif-Nom    """AN: {<JJ><NN>}"""
+Nom-Nom    """NN: {<NN><NN>}"""
+Adjectif-Nom-Nom    """ANN: {<JJ><NN><NN>}"""
+Adjectif-Adjectif-Nom    """AAN: {<JJ><JJ><NN>}"""

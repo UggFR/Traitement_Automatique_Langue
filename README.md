@@ -18,6 +18,12 @@ python3 tp3.py wsj_0010_sample.txt structures_rules.txt
 python3 [script python] [Fichier contenant le texte] [Fichier contenant toutes les structures]
 
 ## Projet
-python3 sujet1.py
+python3 main.py
+
+python3 evaluate.py ../data/pos_test.txt.pos.stanford.univ ../data/pos_reference.txt.univ
+python3 evaluate.py ../data/pos_test.txt.pos.nltk.univ ../data/pos_reference.txt.univ
+
+python3 evaluate.py ../data/ne_test.txt.ne.stanford.conll ../data/ne_reference.txt.conll
+python3 evaluate.py ../data/ne_test.txt.ne.nltk.conll ../data/ne_reference.txt.conll
 
 python3 [script python]
