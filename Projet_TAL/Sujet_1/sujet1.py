@@ -8,13 +8,18 @@ import os
 from nltk.tokenize import word_tokenize
 from nltk          import RegexpParser
 from nltk.tag import StanfordPOSTagger
+from nltk.tag import StanfordNERTagger
 
 java_path = "C:/Program Files/Java/jdk-18.0.1.1/bin/java.exe"
 os.environ['JAVAHOME'] = java_path
 
 stanford_pos_jar   = 'stanford-postagger.jar'
 stanford_pos_model = 'english-bidirectional-distsim.tagger'
-st = StanfordPOSTagger(stanford_pos_model, stanford_pos_jar)
+st_pos = StanfordPOSTagger(stanford_pos_model, stanford_pos_jar)
+
+stanford_ne_jar   = 'stanford-ner.jar'
+stanford_ne_model = 'english.all.3class.distsim.crf.ser.gz'
+st_ner = StanfordNERTagger(stanford_ne_model, stanford_ne_jar, encoding='utf-8')
 
 
 
@@ -46,6 +51,8 @@ TEXT_REF_FILE_NE   = "ne_reference.txt.conll"
 TEXT_RES_FILE_NE   = "ne_test.txt"
 NE_NLTK_FILE       = "ne_test.txt.ne.nltk"
 NE_CONLL_NLTK_FILE = "ne_test.txt.ne.nltk.conll"
+NE_STANFORD_FILE       = "ne_test.txt.ne.stanford"
+NE_CONLL_STANFORD_FILE = "ne_test.txt.ne.stanford.conll"
 
 
 
@@ -122,11 +129,12 @@ def extract_tag_stanford_conll(text_res_file):
         with open(text_res_file, 'r') as file:
             index = 0
             for line in file:
-                if index == 10:
+                if index == 30:
                     break
-                sentence = st.tag(line.split())
+                sentence = st_pos.tag(line.split())
                 for s in sentence:
                     TAG_STANFORD.append((s[0], s[1]))
+                TAG_STANFORD.append("\n")
                 index += 1                
     except FileNotFoundError:
         print(f"File \"{text_res_file}\" not found.")
@@ -236,26 +244,38 @@ def write_tag_file(token_tag_file, text, postagger):
         Le format du fichier de sortie est un mot suivi d'une tabulation et du token associé à ce mot. 
         Une ligne vide signifie le changement de phrase.
     """
-    with open(token_tag_file, 'w') as file:
-        for line in text:
-            # On tokenise chaque ligne du texte grâce au postagger de NLTK
-            tokens_TAG   = word_tokenize(line)
-            tag_nltk_TAG = nltk.pos_tag(tokens_TAG)
-            
-            # On écrit sur une ligne chaque mot du texte suivi d'une tabulation suivi du token NLTK
-            for token in tag_nltk_TAG:
-                file.write(token[0] + "\t" + token[1] + '\n')
-                
-            # On ajoute une ligne vide pour signifier la fin d'une phrase
-            file.write("\n")
-    print(f"Tokenisation {postagger} achieved : File \"{token_tag_file}\" created.")
-    
-def write_named_entities_file(named_entities_file, text, postagger):
+    if(postagger=="NLTK"):
+        with open(token_tag_file, 'w') as file:
+            for line in text:
+                # On tokenise chaque ligne du texte grâce au postagger de NLTK
+                tokens_TAG   = word_tokenize(line)
+                tag_nltk_TAG = nltk.pos_tag(tokens_TAG)
+
+                # On écrit sur une ligne chaque mot du texte suivi d'une tabulation suivi du token NLTK
+                for token in tag_nltk_TAG:
+                    file.write(token[0] + "\t" + token[1] + '\n')
+
+                # On ajoute une ligne vide pour signifier la fin d'une phrase
+                file.write("\n")
+        print(f"Tokenisation {postagger} achieved : File \"{token_tag_file}\" created.")
+
+    if (postagger == "Stanford"):
+        with open(token_tag_file, 'w') as file:
+            extract_tag_stanford_conll(TEXT_RES_FILE_TAG)
+            # On écrit sur une ligne chaque mot du texte suivi d'une tabulation suivi du token
+            for token in TAG_STANFORD:
+                if (token == "\n"):
+                    file.write("\n")
+                else:
+                    file.write(token[0] + "\t" + token[1] + '\n')
+                # On ajoute une ligne vide pour signifier la fin d'une phrase
+
+        print(f"Tokenisation {postagger} achieved : File \"{token_tag_file}\" created.")
+def write_named_entities_nltk_file(named_entities_file, text):
     """
     Args:
         named_entities_file (str): Le chemin du fichier où l'on veut écrire les entités nommées.
         text (array): Tableau contenant les phrases à tokeniser.
-        postagger (str): Nom du postager.
 
     Returns:
         None: La fonction ne retourne rien, elle remplit le fichier des entités nommées des phrases contenues dans le tableau passé en paramètre.
@@ -283,14 +303,48 @@ def write_named_entities_file(named_entities_file, text, postagger):
                         
             # On ajoute une ligne vide pour signifier la fin d'une phrase
             file.write("\n")
-    print(f"Tokenisation {postagger} achieved : File \"{named_entities_file}\" created.")
+    print(f"Tokenisation NLTK achieved : File \"{named_entities_file}\" created.")
+
+
+def write_named_entities_stanford_file(named_entities_file, text):
+    """
+    Args:
+        named_entities_file (str): Le chemin du fichier où l'on veut écrire les entités nommées.
+        text (array): Tableau contenant les phrases à tokeniser.
+
+    Returns:
+        None: La fonction ne retourne rien, elle remplit le fichier des entités nommées des phrases contenues dans le tableau passé en paramètre.
+
+    Remarque:
+        Le format du fichier de sortie est un mot suivi d'une tabulation et de l'entité nommée associé à ce mot.
+        Une ligne vide signifie le changement de phrase.
+    """
+    with open(named_entities_file, 'w') as file:
+        index = 0
+        for line in text:
+            # On tokenise avec les entités nommées chaque ligne du texte grâce au tagger de stanford
+            tokenized_text = word_tokenize(line)
+            entities = st_ner.tag(tokenized_text)
+            # On écrit sur une ligne chaque mot du texte suivi d'une tabulation suivi de l'entité nommée Stanford
+            for token in entities:
+                #Si l'entité est O, alors pas une entité nommé
+                if(token[1]=="O"):
+                    file.write(token[0] + "\t" + "O" + '\n')
+                else:
+                    file.write(token[0] + "\t" + token[1] + '\n')
+
+            # On ajoute une ligne vide pour signifier la fin d'une phrase
+            file.write("\n")
+            index+=1
+            if(index==30):
+                break
+    print(f"Tokenisation Stanford achieved : File \"{named_entities_file}\" created.")
     
-def write_named_entities_conll2003_file(named_entities_file, text, postagger):
+def write_named_entities_conll2003_nltk_file(named_entities_file, text):
     """
     Args:
         named_entities_file (str): Le chemin du fichier où l'on veut écrire les entités nommées converties en étiquette CoNLL-2003.
         text (array): Tableau contenant les phrases à tokeniser.
-        postagger (str): Nom du postager.
 
     Returns:
         None: La fonction ne retourne rien, elle remplit le fichier des entités nommées (format CoNLL-2003) des phrases contenues dans le tableau passé en paramètre.
@@ -305,8 +359,9 @@ def write_named_entities_conll2003_file(named_entities_file, text, postagger):
             tokens_NE   = word_tokenize(line)
             tag_nltk_NE = nltk.pos_tag(tokens_NE)
             entities = nltk.ne_chunk(tag_nltk_NE, binary=False)
-            
+            previousTag = ""
             # On écrit sur une ligne chaque mot du texte suivi d'une tabulation suivi de l'entité nommée NLTK convertie au format CoNLL-2003
+            i=0
             for token in entities:
                 # Si token[0] est un string alors ce mot n'est pas une entité nommée donc on on l'associe à l'entité nommée "O"
                 if isinstance(token[0], str):
@@ -318,22 +373,76 @@ def write_named_entities_conll2003_file(named_entities_file, text, postagger):
                         ne = "-" + C0NLL2003[token.label()]
                     else:
                         ne = "-MISC"
-                        
                     # On ajoute un spécificateur à l'entité nommée avec un B si c'est le premier token de celle-ci et un I sinon
                     for index, item in enumerate(token):
-                        if index == 0:
+                        if index == 0 and ne!=previousTag:
                             ne_token = "B" + ne
                         else:
                             ne_token = "I" + ne
                         file.write(item[0] + "\t" + ne_token + '\n')
-            
+                        previousTag = ne
+
+                i += 1
+                # On ajoute une ligne vide pour signifier la fin d'une phrase
+            file.write("\n")
+    print(f"Tokenisation NLTK achieved : File \"{named_entities_file}\" created.")
+
+
+def write_named_entities_conll2003_stanford_file(named_entities_file, text):
+    """
+    Args:
+        named_entities_file (str): Le chemin du fichier où l'on veut écrire les entités nommées converties en étiquette CoNLL-2003.
+        text (array): Tableau contenant les phrases à tokeniser.
+
+    Returns:
+        None: La fonction ne retourne rien, elle remplit le fichier des entités nommées (format CoNLL-2003) des phrases contenues dans le tableau passé en paramètre.
+
+    Remarque:
+        Le format du fichier de sortie est un mot suivi d'une tabulation et de l'entité nommée (format CoNLL-2003) associé à ce mot.
+        Une ligne vide signifie le changement de phrase.
+    """
+    with open(named_entities_file, 'w') as file:
+        index=0
+        for line in text:
+            # On tokenise avec les entités nommées chaque ligne du texte grâce au tagger de stanford
+            tokenized_text = word_tokenize(line)
+            entities = st_ner.tag(tokenized_text)
+
+            # On écrit sur une ligne chaque mot du texte suivi d'une tabulation suivi de l'entité nommée Stanford convertie au format CoNLL-2003
+            i=0
+            for token in entities:
+                # Si token[0] est un string alors ce mot n'est pas une entité nommée donc on on l'associe à l'entité nommée "O"
+                if(token[1]=="O"):
+                    file.write(token[0] + "\t" + "O" + '\n')
+                # Sinon, nous avons une entité nommée et associons chaque mot de l'entité nommée au label de celle-ci convertie au format CoNLL-2003
+                else:
+                    # Si le label est présent dans le dictionnaire CONNL2023, alors on l'associe au mot sinon on associe "MISC"
+                    if token[1] in C0NLL2003:
+                        ne = "-" + C0NLL2003[token[1]]
+                    else:
+                        ne = "-MISC"
+
+                    # On ajoute un spécificateur à l'entité nommée avec un B si c'est le premier token de celle-ci et un I sinon
+                    if(i>0):
+                        if(entities[i][1]==entities[i-1][1]):
+                            ne_token = "I" + ne
+                        else:
+                            ne_token = "B" + ne
+                    else:
+                        ne_token = "B" + ne
+                    file.write(token[0] + "\t" + ne_token + '\n')
+                i+=1
             # On ajoute une ligne vide pour signifier la fin d'une phrase
             file.write("\n")
-    print(f"Tokenisation {postagger} achieved : File \"{named_entities_file}\" created.")
+
+            index+=1
+            if(index==30):
+                break
+    print(f"Tokenisation Stanford achieved : File \"{named_entities_file}\" created.")
 
 
 ##### MAIN #####
-
+'''
 # CREATION DICTIONNAIRE ETIQUETTE
 create_dic_ref_universal(POSTAGS_REF_PTB, POSTAGS_PTB_UNIV)
 write_postags_universal_file(TEXT_REF_FILE_TAG, POSTAGS_UNIV_FILE, "REF")
@@ -351,12 +460,14 @@ text_TAG = open_file(TEXT_RES_FILE_TAG)
 write_tag_file(POSTAG_NLTK_FILE, text_TAG.split("\n"), "NLTK")
 write_postags_universal_file(POSTAG_NLTK_FILE, POSTAG_UNIV_NLTK_FILE, "PTB")
 
-extract_tag_stanford_conll(TEXT_RES_FILE_TAG)
-write_tag_file(POSTAG_STANFORD_FILE, TAG_STANFORD, "STANFORD")
+write_tag_file(POSTAG_STANFORD_FILE, TEXT_RES_FILE_TAG, "Stanford")
 write_postags_universal_file(POSTAG_STANFORD_FILE, POSTAG_UNIV_STANFORD_FILE, "PTB")
 
 # EXTRACTION ENTITES NOMMEES
+'''
 text_NE = open_file(TEXT_RES_FILE_NE) 
-write_named_entities_file(NE_NLTK_FILE, text_NE.split("\n"), "NLTK")
-write_named_entities_conll2003_file(NE_CONLL_NLTK_FILE, text_NE.split("\n"), "NLTK")
+#write_named_entities_nltk_file(NE_NLTK_FILE, text_NE.split("\n"))
+write_named_entities_conll2003_nltk_file(NE_CONLL_NLTK_FILE, text_NE.split("\n"))
 
+#write_named_entities_stanford_file(NE_STANFORD_FILE, text_NE.split("\n"))
+#write_named_entities_conll2003_stanford_file(NE_CONLL_STANFORD_FILE, text_NE.split("\n"))
