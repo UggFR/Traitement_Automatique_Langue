@@ -18,6 +18,9 @@ python3 tp3.py wsj_0010_sample.txt structures_rules.txt
 python3 [script python] [Fichier contenant le texte] [Fichier contenant toutes les structures]
 
 ## Projet
+
+(main.py n'analyse que les 30 premières lignes du texte avec Stanford, par souci de temps d'exécution)
+
 python3 main.py
 
 python3 evaluate.py ../data/pos_test.txt.pos.stanford.univ ../data/pos_reference.txt.univ
